@@ -2,6 +2,6 @@
 *.out
 *.swp
 *.swo
-.vscode
+# .vscode
 *.dSYM
 *.md
