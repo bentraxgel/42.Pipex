@@ -1,7 +1,7 @@
 #include "pipex.h"
 
 
-int    main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
     int in;
     int fd[2];
@@ -16,7 +16,7 @@ int    main(int ac, char **av, char **envp)
     char *c[3] = {"cat","-e", NULL};
     char *s[3] = {"cat","-e", NULL};
 
-    
+        
     pipe(fd);
     pid = fork();
     if (pid == -1)
