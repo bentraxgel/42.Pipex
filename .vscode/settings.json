@@ -1,5 +1,8 @@
 {
 	"files.associations": {
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"_types.h": "c",
+		"pipex.h": "c",
+		"errno.h": "c"
 	}
 }

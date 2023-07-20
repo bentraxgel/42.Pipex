@@ -22,7 +22,7 @@ int main(int ac, char *av[], char **envp)
 	// new[ac] = NULL;
 	if (fork() != 0)
 	{
-		if (execve("ls", new, envp) == -1)
+		if (execve("/bin/ls", new, envp) == -1)
 		{
 			printf("프로그램 실행 에러 : %s\n", strerror(errno));
 			return (1);

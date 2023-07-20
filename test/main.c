@@ -13,4 +13,5 @@ int main(int argc, char **argv, char **envp)
     while (idx < 3)
         printf("%s\n", envp[idx++]);
     return (0);
+    
 }

@@ -1,0 +1,16 @@
+a.out
+dup2.c
+envp.c
+fd_pipe.c
+fork.c
+fork_flag.c
+infile
+main.c
+outfile1
+pipe.c
+pipex.h
+print_envp
+soo.c
+test
+test.c
+tost.c
