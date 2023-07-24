@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:52:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/20 17:36:01 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/24 19:18:08 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,12 @@ typedef enum e_fd
 	READ = 0,
 	WRITE
 }t_fd;
+
+typedef enum e_prc
+{
+	CHILD = 0,
+//	Parent
+	
+}t_prc;
 
 #endif

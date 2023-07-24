@@ -63,9 +63,10 @@ int main() {
 
     if (pid2 == 0) {
         // 자식 프로세스 2
-        close(fd[WRITE]);
+        // close(fd[WRITE]);
         // 자식 프로세스 2의 입력을 파이프로 리디렉션하고, 출력을 STDOUT에 연결
         dup2(fd[READ], STDIN_FILENO);
+        sleep(2);
 		dup2(fd[WRITE], STDOUT_FILENO);
         close(fd[READ]);
 
@@ -77,28 +78,29 @@ int main() {
         perror("execve");
         exit(EXIT_FAILURE);
     }
-    pid2 = fork();
-    if (pid2 == -1) {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
+    //세번째 자식 프로세스 생성
+    // pid2 = fork();
+    // if (pid2 == -1) {
+    //     perror("fork");
+    //     exit(EXIT_FAILURE);
+    // }
 
-    if (pid2 == 0) {
-        // 자식 프로세스 2
-        close(fd[WRITE]);
-        // 자식 프로세스 2의 입력을 파이프로 리디렉션하고, 출력을 STDOUT에 연결
-        dup2(fd[READ], STDIN_FILENO);
-		dup2(fd[WRITE], STDOUT_FILENO);
-        close(fd[READ]);
+    // if (pid2 == 0) {
+    //     // 자식 프로세스 2
+    //     close(fd[WRITE]);
+    //     // 자식 프로세스 2의 입력을 파이프로 리디렉션하고, 출력을 STDOUT에 연결
+    //     dup2(fd[READ], STDIN_FILENO);
+	// 	dup2(fd[WRITE], STDOUT_FILENO);
+    //     close(fd[READ]);
 
-        // 실행할 명령어
-        char *cmd2[] = {"cat", "-e", NULL};
-        execve("/bin/cat", cmd2, NULL);
+    //     // 실행할 명령어
+    //     char *cmd2[] = {"cat", "-e", NULL};
+    //     execve("/bin/cat", cmd2, NULL);
 
-        // execve 호출이 실패한 경우
-        perror("execve");
-        exit(EXIT_FAILURE);
-    }
+    //     // execve 호출이 실패한 경우
+    //     perror("execve");
+    //     exit(EXIT_FAILURE);
+    // }
 
     // 부모 프로세스
     // close(fd[READ]);

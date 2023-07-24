@@ -17,8 +17,9 @@ int main(int argc, char **argv, char **envp)
         perror("pipe"); // 에러 메시지 출력
         exit(EXIT_FAILURE); // 프로세스 종료
     }
-
-    for (int i = 1; i < argc; i++)
+    int in = open("infile", O_RDONLY);
+    dup2(in, fd[WRITE]);
+    for (int i = 1; i < 4; i++)
     {
         pid = fork(); // 자식 프로세스 생성
         if (pid == -1) // fork 실패시
@@ -29,13 +30,14 @@ int main(int argc, char **argv, char **envp)
 
         if (pid == 0) // 자식 프로세스
         {
-            close(fd[READ]); // 읽기용 파이프 닫기
+            // close(fd[READ]); // 읽기용 파이프 닫기
+            dup2(fd[READ], STDIN_FILENO);
             dup2(fd[WRITE], STDOUT_FILENO); // 표준 출력을 파이프로 리다이렉트
             close(fd[WRITE]); // 쓰기용 파이프 닫기
 
             // 실행할 명령어와 인수 설정
-            char *cmd[] = {argv[i], NULL};
-            execve(cmd[0], cmd, envp);
+            char *cmd[] = {"cat", "-e", NULL};
+            execve("/bin/cat", cmd, envp);
 
             // execve 실패시 에러 메시지 출력하고 프로세스 종료
             perror("execve");
@@ -53,10 +55,11 @@ int main(int argc, char **argv, char **envp)
 
     // 이제 출력 파일에 결과값을 담음
     outfile_fd = open("outfile", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    dup2(fd[READ], STDIN_FILENO);
     dup2(outfile_fd, STDOUT_FILENO);
 
     // cat 명령어를 실행하여 결과값을 출력 파일에 저장
-    char *cmd[] = {"cat", NULL};
+    char *cmd[] = {"cat", "-e", NULL};
     execve("/bin/cat", cmd, envp);
 
     // execve 실패시 에러 메시지 출력하고 프로세스 종료
