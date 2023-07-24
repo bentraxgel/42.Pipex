@@ -63,10 +63,10 @@ int main() {
 
     if (pid2 == 0) {
         // 자식 프로세스 2
-        // close(fd[WRITE]);
+        close(fd[WRITE]);
         // 자식 프로세스 2의 입력을 파이프로 리디렉션하고, 출력을 STDOUT에 연결
         dup2(fd[READ], STDIN_FILENO);
-        sleep(2);
+        // sleep(2);
 		dup2(fd[WRITE], STDOUT_FILENO);
         close(fd[READ]);
 
