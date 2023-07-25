@@ -1,25 +1,4 @@
-sleep     20387 seok  cwd       DIR                1,9        850             4010809 /Users/seok/Desktop/pipex/test
-sleep     20387 seok  txt       REG                1,4      31328 1152921500311902425 /bin/sleep
-sleep     20387 seok  txt       REG                1,4    1568368 1152921500311885630 /usr/lib/dyld
-sleep     20387 seok    0      PIPE  0xcd9016af2fc7270      16384                     ->0xeb6ae3d39620383b
-sleep     20387 seok    1u      REG                1,9          0             4135330 /Users/seok/Desktop/pipex/test/outfile
-sleep     20387 seok    2u      CHR               16,1  0t8612023                 693 /dev/ttys001
-sleep     20387 seok    3r      REG                1,9         11             4116387 /Users/seok/Desktop/pipex/test/infile
-sleep     20387 seok    4      PIPE 0xd28e9bb82a905f0d      16384                     ->0x142d2dfba0c4384c
-sleep     20387 seok    5      PIPE  0xcd9016af2fc7270      16384                     ->0xeb6ae3d39620383b
-sleep     20387 seok    6u      REG                1,9          0             4135330 /Users/seok/Desktop/pipex/test/outfile
-sleep     20388 seok  cwd       DIR                1,9        850             4010809 /Users/seok/Desktop/pipex/test
-sleep     20388 seok  txt       REG                1,4      31328 1152921500311902425 /bin/sleep
-sleep     20388 seok  txt       REG                1,4    1568368 1152921500311885630 /usr/lib/dyld
-sleep     20388 seok    0r      REG                1,9         11             4116387 /Users/seok/Desktop/pipex/test/infile
-sleep     20388 seok    1      PIPE 0x142d2dfba0c4384c      16384                     ->0xd28e9bb82a905f0d
-sleep     20388 seok    2u      CHR               16,1  0t8612023                 693 /dev/ttys001
-sleep     20388 seok    3r      REG                1,9         11             4116387 /Users/seok/Desktop/pipex/test/infile
-sleep     20389 seok  cwd       DIR                1,9        850             4010809 /Users/seok/Desktop/pipex/test
-sleep     20389 seok  txt       REG                1,4      31328 1152921500311902425 /bin/sleep
-sleep     20389 seok  txt       REG                1,4    1568368 1152921500311885630 /usr/lib/dyld
-sleep     20389 seok    0      PIPE 0xd28e9bb82a905f0d      16384                     ->0x142d2dfba0c4384c
-sleep     20389 seok    1      PIPE 0xeb6ae3d39620383b      16384                     ->0xcd9016af2fc7270
-sleep     20389 seok    2u      CHR               16,1  0t8612023                 693 /dev/ttys001
-sleep     20389 seok    3r      REG                1,9         11             4116387 /Users/seok/Desktop/pipex/test/infile
-sleep     20389 seok    4      PIPE 0xd28e9bb82a905f0d      16384                     ->0x142d2dfba0c4384c
+i$$$$$$
+am$$$$$$
+se$$$$$$
+won

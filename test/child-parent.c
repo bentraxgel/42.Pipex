@@ -29,19 +29,31 @@ void	exec_process(char *cmd[])
 	}
 }
 
-int	main()
+void	info_init(t_info *info)
 {
-	int	in = open("infile", O_RDONLY);
-	dup2(in, STDIN_FILENO);
-	char *cmd[] = {"cat", "-e", NULL};
-	int	fd[2];
+	info->stdin_fd = dup(STDIN_FILENO);
+	info->stdout_fd = dup(STDOUT_FILENO);
+	info->infile_fd = open("infile", O_RDONLY | O_CLOEXEC); //infile아니고 av[1]
+}
 
-	pipe(fd);
+void	info_close(t_info *info)
+{
+	close(info->outfile_fd);
+	dup2()
+}
+
+int	main(int ac, char *av[], char **envp)
+{
+	t_info	info;
+
+	info_init(&info);
+	dup2(info.infile_fd, STDIN_FILENO);
+	char *cmd[] = {"cat", "-e", NULL}; //PARSING_av[]
+
 	for (int i = 0; i < 5; i++)
 	{
 		exec_process(cmd);
 	}
-	close(fd[READ]);
-	close(fd[WRITE]);
+	info_close(&info);
 	last(cmd);
 }

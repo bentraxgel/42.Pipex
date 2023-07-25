@@ -1,4 +1,4 @@
-// TODO dup2로 outfile만드는 코드이긴한데... 뭐 아무것도 안됨.
+// dup2로 outfile만드는 코드이긴한데... 뭐 아무것도 안됨.
 // 근데 이거 참고해서 내가 짜보면 해결될것같아
 #include <stdio.h>
 #include <stdlib.h>
