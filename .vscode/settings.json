@@ -3,6 +3,8 @@
 		"stdio.h": "c",
 		"_types.h": "c",
 		"pipex.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"stdbool.h": "c",
+		"libft.h": "c"
 	}
 }

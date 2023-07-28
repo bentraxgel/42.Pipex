@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:52:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/25 20:22:06 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/28 21:10:34 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/errno.h> //errno
 # include <stdlib.h> //exit
 # include <fcntl.h> //open
+# include <stdbool.h>
 
 typedef enum e_fd
 {
@@ -29,6 +30,7 @@ typedef enum e_fd
 
 typedef enum e_prc
 {
+	ERROR = -1,
 	CHILD = 0,
 //	Parent
 	
@@ -42,5 +44,13 @@ typedef struct s_info
 	int	outfile_fd;
 	int fd[2];
 }t_info;
+
+// execution.c
+void	here_doc(t_info *info, char *limiter);
+void	first_execution(t_info *info, char **av, int idx, char **envp, char *path);
+void	other_execution(t_info *info, char **av, int idx, char **envp, char *path);
+char	*path_access(char **env, char *cmd_options);
+char	*str_cmd(char **cmd_options);
+void	last_execution(t_info *info, char **av, int idx, char **envp, char *path);
 
 #endif
