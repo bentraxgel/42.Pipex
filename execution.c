@@ -3,47 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kumamon <kumamon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/07/29 16:25:12 by kumamon          ###   ########.fr       */
+/*   Updated: 2023/07/30 16:46:09 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	here_doc(t_info *info, char *limiter)
-{
-	pid_t	pid;
-	char	*ret;
-
-	pipe(info->fd);
-	pid = fork();
-	if (pid == ERROR)
-		my_error("Fail fork");
-	else if (pid == CHILD)
-	{
-		close(info->fd[READ]);
-		while (get_next_line(STDIN_FILENO, &ret) == true)
-		{
-			printf("while : ");
-			if (ft_strncmp(ret, limiter, ft_strlen(limiter)) == 0)
-				break ;
-			else
-				write(info->fd[WRITE], ret, ft_strlen(ret));
-		}
-		close(info->fd[WRITE]);
-	}
-	else
-	{
-		waitpid(pid, NULL, WNOHANG);
-		close(info->fd[WRITE]);
-		dup2(info->fd[READ], STDIN_FILENO);
-		close(info->fd[READ]);
-	}
-} // heredoc last_e도 따로 처리해야함 APPEND땜시
-
-void	first_execution(t_info *info, char **av, int idx, char **envp, char *path)
+void	infile_execution(t_info *info, char **av, int idx, char **envp)
 {
 	pid_t	pid;
 	char	**cmd_options;
@@ -61,9 +30,8 @@ void	first_execution(t_info *info, char **av, int idx, char **envp, char *path)
 		dup2(info->infile_fd, STDIN_FILENO);
 		close(info->fd[READ]);
 		dup2(info->fd[WRITE], STDOUT_FILENO);
-		if (execve(path, cmd_options, envp) == ERROR)
+		if (execve(info->path, cmd_options, envp) == ERROR)
 			my_error("execve");
-
 	}
 	else
 	{
@@ -74,7 +42,7 @@ void	first_execution(t_info *info, char **av, int idx, char **envp, char *path)
 	}
 }
 
-void	other_execution(t_info *info, char **av, int idx, char **envp, char *path)
+void	cmd_execution(t_info *info, char **av, int idx, char **envp)
 {
 	char	**cmd_options;
 	pid_t	pid;
@@ -88,7 +56,7 @@ void	other_execution(t_info *info, char **av, int idx, char **envp, char *path)
 	{
 		close(info->fd[READ]);
 		dup2(info->fd[WRITE], STDOUT_FILENO);
-		if (execve(path, cmd_options, envp) == ERROR)
+		if (execve(info->path, cmd_options, envp) == ERROR)
 			my_error("execve");
 	}
 	else
@@ -100,30 +68,30 @@ void	other_execution(t_info *info, char **av, int idx, char **envp, char *path)
 	}
 }
 
-char	*ft_strjoin_free(char *s1, char *s2)
-{
-	int		s1_len;
-	int		s2_len;
-	char	*ret;
+// char	*ft_strjoin_free(char *s1, char *s2)
+// {
+// 	int		s1_len;
+// 	int		s2_len;
+// 	char	*ret;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	ret = (char *)malloc(s1_len + s2_len + 1);
-	if (!ret)
-		return (0);
-	ft_memcpy(ret, s1, s1_len);
-	// if (s1 != NULL)
-	// 	free(s1);
-	ft_memcpy(ret + s1_len, s2, s2_len);
-	ret[s1_len + s2_len] = 0;
-	return (ret);
-}
+// 	s1_len = ft_strlen(s1);
+// 	s2_len = ft_strlen(s2);
+// 	ret = (char *)malloc(s1_len + s2_len + 1);
+// 	if (!ret)
+// 		return (0);
+// 	ft_memcpy(ret, s1, s1_len);
+// 	// if (s1 != NULL)
+// 	// 	free(s1);
+// 	ft_memcpy(ret + s1_len, s2, s2_len);
+// 	ret[s1_len + s2_len] = 0;
+// 	return (ret);
+// }
 
 char	*path_access(char **env, char *cmd_options)
 {
 	int		i;
 	char	*path;
-	char	*path1;
+	// char	*path1;
 	char	*slash = "/";
 	cmd_options = ft_strjoin_free(slash, cmd_options);
 
@@ -164,13 +132,13 @@ char	*str_cmd(char **cmd_options)
 	return (cmd);
 }
 
-void	last_execution(t_info *info, char **av, int idx, char **envp, char *path)
+void	outfile_execution(t_info *info, char **av, int idx, char **envp)
 {
 	char	**cmd_options;
 
 	cmd_options = ft_split(av[idx], ' ');
-	info->outfile_fd = open("outfile", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	info->outfile_fd = open(av[info->ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	dup2(info->outfile_fd, STDOUT_FILENO);
-	if (execve(path, cmd_options, 0) == ERROR)
+	if (execve(info->path, cmd_options, envp) == ERROR)
 		my_error("execve_last");
 }
