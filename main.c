@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kumamon <kumamon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:29:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/28 21:14:07 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/30 13:10:34 by kumamon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char *av[], char **envp)
 	{
 		i++;
 		printf("ehre");
-		// here_doc(&info, av[i]);
+		here_doc(&info, av[i]);
 		printf("HERE\n");
 	}
 	// int cmd1 = i;

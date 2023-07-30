@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kumamon <kumamon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/07/28 21:13:03 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/29 16:25:12 by kumamon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	here_doc(t_info *info, char *limiter)
 		dup2(info->fd[READ], STDIN_FILENO);
 		close(info->fd[READ]);
 	}
-}
+} // heredoc last_e도 따로 처리해야함 APPEND땜시
 
 void	first_execution(t_info *info, char **av, int idx, char **envp, char *path)
 {
