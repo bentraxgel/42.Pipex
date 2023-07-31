@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:17:43 by seok              #+#    #+#             */
-/*   Updated: 2023/07/31 21:42:56 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/31 22:53:24 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	here_doc(t_info *info, char **av, int i, char **envp)
 	char	**env;
 	char	**cmd_options;
 
-	write(1, "here", 4);
+	// write(1, "here", 4);
 	env = split_environ(envp);
+	input_heredoc(info);
 	while (++i < info->ac - 1)
 	// while ( 1)
 	{
@@ -30,9 +31,8 @@ void	here_doc(t_info *info, char **av, int i, char **envp)
 		// write(1, "\n", 1);
 		cmd_options = ft_split(av[i], ' ');
 		info->path = path_access(env, cmd_options[0]);
-		if (i == 2) //heredoc은 first_e필요없음
-			input_heredoc(info);
-		else if (i == info->ac - 2)
+		// if (i == 2) //heredoc은 first_e필요없음
+		if (i == info->ac - 2)
 			outfile_heredoc(info, av, i, envp);
 		// heredoc last_e도 따로 처리해야함 APPEND땜시
 		else
@@ -52,13 +52,13 @@ void	input_heredoc(t_info *info)
 	else if (pid == CHILD)
 	{
 		close(info->fd[READ]);
-		write(1, "H", 1);
+		// write(1, "H", 1);
 		while (get_next_line(STDIN_FILENO, &ret) == true)
 		{
 			if (ft_strncmp(ret, info->limiter, ft_strlen(info->limiter) + 1) == 0) {
+				// break ; //프로세스가 종료되지 않고 실행중이야 바보야!
 				exit(0);
 				// close(info->fd[WRITE]);
-				// break ; //프로세스가 종료되지 않고 실행중이야 바보야!
 			}
 			else
 				write(info->fd[WRITE], ret, ft_strlen(ret));
@@ -69,6 +69,7 @@ void	input_heredoc(t_info *info)
 	else
 	{
 		wait(NULL);
+		fprintf(stderr, "**********\n");
 		close(info->fd[WRITE]);
 		dup2(info->fd[READ], STDIN_FILENO);
 		close(info->fd[READ]);

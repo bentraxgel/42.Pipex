@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/07/31 21:28:13 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/31 22:39:19 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	cmd_execution(t_info *info, char **av, int idx, char **envp)
 	{
 		close(STDIN_FILENO);
 		waitpid(pid, NULL, WNOHANG);
+		fprintf(stderr, "^^^^^^\n");
 		dup2(info->fd[READ], STDIN_FILENO);
 		close(info->fd[WRITE]);
 		close(info->fd[READ]);

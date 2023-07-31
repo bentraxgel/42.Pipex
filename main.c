@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:29:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/31 19:51:16 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/31 22:53:07 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	main(int ac, char *av[], char **envp)
 	i = 1; //TODO 얘가 cmd1이 될 수 있도록 유도필요.
 	if (ft_strncmp(av[i], "here_doc", 9) == 0)
 	{
-		// i++;
-		info.limiter = ft_strjoin(av[i + 1], "\n");
-		write(1, info.limiter, ft_strlen(info.limiter));
-		write(1, "W", 1);
+		i++;
+		info.limiter = ft_strjoin(av[i], "\n");
+		// write(1, info.limiter, ft_strlen(info.limiter));
+		// write(1, "W", 1);
 		here_doc(&info, av, i, envp);
 	}
 	else
