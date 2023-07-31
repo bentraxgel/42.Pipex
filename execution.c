@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/07/31 19:04:47 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/31 21:28:13 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	cmd_execution(t_info *info, char **av, int idx, char **envp)
 
 	cmd_options = ft_split(av[idx], ' ');
 	pipe(info->fd);
-	pid = fork();
-	if (pid == ERROR)
+	// pid = fork();
+	if ((pid = fork()) == ERROR) //TODO possible?
+	// if (pid == ERROR)
 		my_error("Fail fork");
 	else if (pid == CHILD)
 	{
@@ -61,9 +62,10 @@ void	cmd_execution(t_info *info, char **av, int idx, char **envp)
 	}
 	else
 	{
+		close(STDIN_FILENO);
 		waitpid(pid, NULL, WNOHANG);
-		close(info->fd[WRITE]);
 		dup2(info->fd[READ], STDIN_FILENO);
+		close(info->fd[WRITE]);
 		close(info->fd[READ]);
 	}
 }
