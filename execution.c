@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/07/30 16:46:09 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/31 19:04:47 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ char	*path_access(char **env, char *cmd_options)
 
 	i = 0;
 	path = NULL;
-	for (int i = 0; env[i]; i++)
-		printf("[%d] -> %s\n",i, env[i]);
+// for (int i = 0; env[i]; i++)
+// 	printf("[%d] -> %s\n",i, env[i]);
 	while (env[i] != NULL)
 	{
 		path = ft_strjoin_free(path, env[i]);
-		printf("+ env[%d] : %s +\n", i, env[i]);
+// printf("+ env[%d] : %s +\n", i, env[i]);
 		// path = ft_strjoin(path, slash);
 		path = ft_strjoin_free(path, cmd_options);
-		printf("%s\n", path);
+// printf("%s\n", path);
 		if (access(path, X_OK) == ERROR)
 		{
 			free(path);

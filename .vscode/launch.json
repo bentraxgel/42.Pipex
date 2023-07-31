@@ -8,9 +8,10 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Launch",
-			"program": "${workspaceFolder}/pipex",
+			"program": "${workspaceFolder}/test/a.out",
 			"args": [
-				"infile", "cat -e", "cat -e", "cat -e", "outfile"
+				"you"
+				// "infile", "cat -e", "cat -e", "cat -e", "outfile"
 			],
 			"cwd": "${workspaceFolder}"
 		}

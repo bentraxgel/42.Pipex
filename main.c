@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:29:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/30 15:45:55 by seok             ###   ########.fr       */
+/*   Updated: 2023/07/31 19:44:27 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,18 @@ int	main(int ac, char *av[], char **envp)
 
 	if (ac < 5)
 		my_error("Not enough argument count");
-	env = split_environ(envp);
 	info.ac = ac;
 	i = 1; //TODO 얘가 cmd1이 될 수 있도록 유도필요.
 	if (ft_strncmp(av[i], "here_doc", 9) == 0)
 	{
 		i++;
-		info.limiter = av[i];
+		info.limiter = ft_strjoin(av[i], "\n");
+		write(1, "W", 1);
 		here_doc(&info, av, i, envp);
 	}
 	else
 	{
+	env = split_environ(envp);
 		// else
 		// 	multiple_pipe(&info, av, i, envp);
 		/* ... */
