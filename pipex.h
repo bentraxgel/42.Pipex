@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:52:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/31 19:02:00 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/01 20:04:42 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_info
 	int		ac;
 	char	*path;
 	char	*limiter;
+	char	**env;
 }t_info;
 
 // main.c
@@ -54,10 +55,11 @@ char	**split_environ(char **envp);
 
 // execution.c
 //void	multiple_pipe(t_info *info, char **av, int i, char **envp);
+int		is_cmd(char *cmd_options);
 void	infile_execution(t_info *info, char **av, int idx, char **envp);
 void	cmd_execution(t_info *info, char **av, int idx, char **envp);
 void	outfile_execution(t_info *info, char **av, int idx, char **envp);
-char	*path_access(char **env, char *cmd_options);
+int		path_access(char **env, char *cmd_options, t_info *info);
 char	*str_cmd(char **cmd_options); //TODO 필요한지 체크
 
 // heredoc.c

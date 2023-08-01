@@ -6,12 +6,12 @@
 #    By: seok <seok@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 15:46:22 by seok              #+#    #+#              #
-#    Updated: 2023/07/31 16:12:23 by seok             ###   ########.fr        #
+#    Updated: 2023/08/01 21:01:48 by seok             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAG = -Wall -Wextra -Werror #-fsanitize=address -g3
 NAME = pipex
 SRC = main.c execution.c heredoc.c
 OBJ = $(SRC:.c=.o)

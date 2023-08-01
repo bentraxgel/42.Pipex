@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:29:00 by seok              #+#    #+#             */
-/*   Updated: 2023/07/31 22:53:07 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/01 21:08:22 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,45 +28,33 @@ char	**split_environ(char **envp)
 	return (env);
 }
 
+void	leaks(void) {
+	system("leaks -q pipex");
+}
+
 int	main(int ac, char *av[], char **envp)
 {
+	atexit(leaks);
 	int		i;
-	char	**env;
-	char	**cmd_options;
 	t_info	info;
 
 	if (ac < 5)
 		my_error("Not enough argument count");
 	info.ac = ac;
-	i = 1; //TODO 얘가 cmd1이 될 수 있도록 유도필요.
+	i = 1;
 	if (ft_strncmp(av[i], "here_doc", 9) == 0)
 	{
 		i++;
 		info.limiter = ft_strjoin(av[i], "\n");
-		// write(1, info.limiter, ft_strlen(info.limiter));
-		// write(1, "W", 1);
 		here_doc(&info, av, i, envp);
 	}
 	else
 	{
-	env = split_environ(envp);
-		// else
-		// 	multiple_pipe(&info, av, i, envp);
-		/* ... */
-		// int cmd1 = i;
-		// printf("cmd1 = %d", cmd1);
-		// exit(0);
-
-		// printf("ac : %d\tav[2] : %s\tav[%d] : %s\n", ac, av[2], ac - 2, av[ac - 2]);
-		// cmd_setting
-		// cmd_execution(ac, av, &info, envp);
+		info.env = split_environ(envp);
 		while (++i < ac - 1)
 		{
-			// << multipel pipe >>
-			cmd_options = ft_split(av[i], ' ');
-			info.path = path_access(env, cmd_options[0]);
-			// if (i == cmd1) //TODO 2가 아니고 cmd1
-			if (i == 2) //heredoc은 first_e필요없음
+			/* multipel pipe */
+			if (i == 2)
 				infile_execution(&info, av, i, envp);
 			else if (i == ac - 2)
 				outfile_execution(&info, av, i, envp);
