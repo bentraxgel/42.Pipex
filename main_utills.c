@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 13:44:03 by seok              #+#    #+#             */
-/*   Updated: 2023/08/02 13:46:14 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 13:52:57 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ int	is_cmd(char *cmd_options)
 	return (true);
 }
 /*
+int	is_cmd(char *cmd_options, t_info *info)
+{
+	if (cmd_options == NULL)
+		return (false);
+	if (access(cmd_options, X_OK) != ERROR)
+	{
+		info->path = cmd_options;
+		return (true);
+	}
+	else
+		return (false);
+}
+
 int	path_access(char *cmd_options, t_info *info)
 {
 	int		i;
@@ -29,6 +42,8 @@ int	path_access(char *cmd_options, t_info *info)
 	else
 		return (true);
 	cmd_options = ft_strjoin("/", cmd_options);
+
+
 */
 
 int	path_access(char **env, char *cmd_options, t_info *info)

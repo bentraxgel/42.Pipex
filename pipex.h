@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:52:00 by seok              #+#    #+#             */
-/*   Updated: 2023/08/01 20:04:42 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 13:53:04 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**split_environ(char **envp);
 // execution.c
 //void	multiple_pipe(t_info *info, char **av, int i, char **envp);
 int		is_cmd(char *cmd_options);
+// int		is_cmd(char *cmd_options, t_info *info);
 void	infile_execution(t_info *info, char **av, int idx, char **envp);
 void	cmd_execution(t_info *info, char **av, int idx, char **envp);
 void	outfile_execution(t_info *info, char **av, int idx, char **envp);

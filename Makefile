@@ -6,14 +6,14 @@
 #    By: seok <seok@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 15:46:22 by seok              #+#    #+#              #
-#    Updated: 2023/08/02 13:46:29 by seok             ###   ########.fr        #
+#    Updated: 2023/08/02 13:47:01 by seok             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAG = -Wall -Wextra -Werror -g #-fsanitize=address -g3
 NAME = pipex
-SRC = main.c execution.c heredoc.c #main_utills.c
+SRC = main.c execution.c heredoc.c main_utills.c
 OBJ = $(SRC:.c=.o)
 OBJ_DIR := obj
 OBJ_FILE = $(addprefix $(OBJ_DIR)/, $(OBJ))
