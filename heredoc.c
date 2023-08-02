@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:17:43 by seok              #+#    #+#             */
-/*   Updated: 2023/08/01 21:05:50 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 11:11:47 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	input_heredoc(t_info *info)
 		close(info->fd[READ]);
 		while (get_next_line(STDIN_FILENO, &ret) == true)
 		{
-			if (ft_strncmp(ret, info->limiter, ft_strlen(info->limiter) + 1) == 0) {
+			if (ft_strncmp(ret, info->limiter, ft_strlen(info->limiter) + 1) == 0)
 				exit(0);
-			}
 			else
 				write(info->fd[WRITE], ret, ft_strlen(ret));
+			free(ret);
 		}
 		close(info->fd[WRITE]);
 	}
