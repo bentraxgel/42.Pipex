@@ -6,18 +6,11 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/08/01 21:04:42 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 13:45:52 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	is_cmd(char *cmd_options)
-{
-	if (cmd_options == NULL)
-		return (false);
-	return (true);
-}
 
 void	infile_execution(t_info *info, char **av, int idx, char **envp)
 {
@@ -84,40 +77,41 @@ void	cmd_execution(t_info *info, char **av, int idx, char **envp)
 	}
 }
 
-int	path_access(char **env, char *cmd_options, t_info *info)
-{
-	int		i;
-	char	*path;
-	if (is_cmd(cmd_options) == false)
-		return (false);
-	if (access(cmd_options, X_OK) != ERROR)
-	{
-		info->path = cmd_options;
-		return (true);
-	}
-	cmd_options = ft_strjoin_free("/", cmd_options);
 
-	i = 0;
-	path = NULL;
-	while (env[i] != NULL)
-	{
-		path = ft_strjoin_free(path, env[i]);
-		path = ft_strjoin_free(path, cmd_options);
-		if (access(path, X_OK) == ERROR)
-		{
-			free(path);
-			path = NULL;
-		}
-		else
-		{
-			info->path = path;
-			return (true);
-		}
-		i++;
-	}
-	perror("Not access");
-	return (false);
-}
+// int	path_access(char **env, char *cmd_options, t_info *info)
+// {
+// 	int		i;
+// 	char	*path;
+// 	if (is_cmd(cmd_options) == false)
+// 		return (false);
+// 	if (access(cmd_options, X_OK) != ERROR)
+// 	{
+// 		info->path = cmd_options;
+// 		return (true);
+// 	}
+// 	cmd_options = ft_strjoin_free("/", cmd_options);
+
+// 	i = 0;
+// 	path = NULL;
+// 	while (env[i] != NULL)
+// 	{
+// 		path = ft_strjoin_free(path, env[i]);
+// 		path = ft_strjoin_free(path, cmd_options);
+// 		if (access(path, X_OK) == ERROR)
+// 		{
+// 			free(path);
+// 			path = NULL;
+// 		}
+// 		else
+// 		{
+// 			info->path = path;
+// 			return (true);
+// 		}
+// 		i++;
+// 	}
+// 	perror("Not access");
+// 	return (false);
+// }
 
 // TODO don't need?
 char	*str_cmd(char **cmd_options)

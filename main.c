@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:29:00 by seok              #+#    #+#             */
-/*   Updated: 2023/08/01 21:08:22 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 13:30:33 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**split_environ(char **envp)
 {
-	char	**env;
+	// char	**env;
 	int		i;
 
 	i = -1;
@@ -24,12 +24,27 @@ char	**split_environ(char **envp)
 			break;
 	}
 	envp[i] = ft_strtrim(envp[i], "PATH=");
-	env = ft_split(envp[i], ':');
-	return (env);
+	// env = ft_split(envp[i], ':');
+	return (ft_split(envp[i], ':'));
 }
+// char	**split_environ(char **envp)
+// {
+// 	char	**env;
+// 	int		i;
+
+// 	i = -1;
+// 	while (envp[++i])
+// 	{
+// 		if (ft_strnstr(envp[i], "PATH=", ft_strlen(envp[i])) != NULL)
+// 			break;
+// 	}
+// 	envp[i] = ft_strtrim(envp[i], "PATH=");
+// 	env = ft_split(envp[i], ':');
+// 	return (env);
+// }
 
 void	leaks(void) {
-	system("leaks -q pipex");
+	system("leaks pipex");
 }
 
 int	main(int ac, char *av[], char **envp)
