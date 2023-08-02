@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:52:00 by seok              #+#    #+#             */
-/*   Updated: 2023/08/02 13:53:04 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 16:51:30 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 typedef enum e_fd
 {
 	READ = 0,
-	WRITE
+	WRITE,
+	SAVE,
+	RESTORE
 }t_fd;
 
 typedef enum e_prc
 {
 	ERROR = -1,
 	CHILD = 0,
-//	Parent
-	
 }t_prc;
 
 typedef struct s_info
@@ -42,7 +42,7 @@ typedef struct s_info
 	int		stdout_fd;
 	int		infile_fd;
 	int		outfile_fd;
-	int 	fd[2];
+	int		fd[2];
 	int		ac;
 	char	*path;
 	char	*limiter;
@@ -50,18 +50,20 @@ typedef struct s_info
 }t_info;
 
 // main.c
+pid_t	do_fork_pipe(t_info *info);
+
+// main_utills.c
+void	save_restore_fd(t_info *info, t_fd flag);
 char	**split_environ(char **envp);
-
-
-// execution.c
-//void	multiple_pipe(t_info *info, char **av, int i, char **envp);
 int		is_cmd(char *cmd_options);
-// int		is_cmd(char *cmd_options, t_info *info);
+int		access_check(char **env, char *cmd_options, t_info *info);
+int		path_access(char **env, char *cmd_options, t_info *info);
+
+// multiple.c
+void	multiple_pipe(t_info *info, char **av, int i, char **envp);
 void	infile_execution(t_info *info, char **av, int idx, char **envp);
 void	cmd_execution(t_info *info, char **av, int idx, char **envp);
 void	outfile_execution(t_info *info, char **av, int idx, char **envp);
-int		path_access(char **env, char *cmd_options, t_info *info);
-char	*str_cmd(char **cmd_options); //TODO 필요한지 체크
 
 // heredoc.c
 void	here_doc(t_info *info, char **av, int idx, char **envp);
