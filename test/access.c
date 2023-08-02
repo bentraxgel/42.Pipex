@@ -2,7 +2,7 @@
 
 int	main()
 {
-	if (access("/usr/bin/yes", X_OK) == 0)
+	if (access("cat", X_OK) == 0)
 		printf("true\n");
 	else
 		printf("false");

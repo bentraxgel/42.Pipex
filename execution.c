@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:30:27 by seok              #+#    #+#             */
-/*   Updated: 2023/08/02 13:45:52 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 15:58:18 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	infile_execution(t_info *info, char **av, int idx, char **envp)
 	pid_t	pid;
 	char	**cmd_options;
 
+(void)envp;
 	pipe(info->fd);
 	pid = fork();
 	if (pid == ERROR)
@@ -29,13 +30,15 @@ void	infile_execution(t_info *info, char **av, int idx, char **envp)
 		cmd_options = ft_split(av[idx], ' ');
 		if (path_access(info->env, cmd_options[0], info) == false)
 		{
+			// my_free(cmd_options);
 			exit(1) ;
 		}
 		dup2(info->infile_fd, STDIN_FILENO);
 		close(info->fd[READ]);
 		dup2(info->fd[WRITE], STDOUT_FILENO);
-		if (execve(info->path, cmd_options, envp) == ERROR)
+		if (execve(info->path, cmd_options, 0) == ERROR)
 			my_error("execve");
+		// my_free(cmd_options);
 	}
 	else
 	{
@@ -60,12 +63,14 @@ void	cmd_execution(t_info *info, char **av, int idx, char **envp)
 		cmd_options = ft_split(av[idx], ' ');
 		if (path_access(info->env, cmd_options[0], info) == false)
 		{
+			// my_free(cmd_options);
 			exit(1) ;
 		}
 		close(info->fd[READ]);
 		dup2(info->fd[WRITE], STDOUT_FILENO);
 		if (execve(info->path, cmd_options, envp) == ERROR)
 			my_error("execve");
+		// my_free(cmd_options);
 	}
 	else
 	{
@@ -131,9 +136,13 @@ void	outfile_execution(t_info *info, char **av, int idx, char **envp)
 
 	cmd_options = ft_split(av[idx], ' ');
 	if (path_access(info->env, cmd_options[0], info) == false)
-		return ;
+	{
+		// my_free(cmd_options);
+		exit(1) ;
+	}
 	info->outfile_fd = open(av[info->ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	dup2(info->outfile_fd, STDOUT_FILENO);
 	if (execve(info->path, cmd_options, envp) == ERROR)
 		my_error("execve_last");
+	// my_free(cmd_options);
 }

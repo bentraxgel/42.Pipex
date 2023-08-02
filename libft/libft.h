@@ -79,5 +79,6 @@ int		ft_abs(int n);
 int		ft_isspace(int c);
 void	*my_alloc_guard(size_t typesize, size_t count);
 int		my_error(char *err);
+void	my_free(char **arr);
 
 #endif

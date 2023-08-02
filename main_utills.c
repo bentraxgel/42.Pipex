@@ -6,7 +6,7 @@
 /*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 13:44:03 by seok              #+#    #+#             */
-/*   Updated: 2023/08/02 13:52:57 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 16:10:26 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	path_access(char **env, char *cmd_options, t_info *info)
 		info->path = cmd_options;
 		return (true);
 	}
-	cmd_options = ft_strjoin_free("/", cmd_options);
+	cmd_options = ft_strjoin("/", cmd_options); // "/cat -e"
 
 	i = 0;
 	path = NULL;
 	while (env[i] != NULL)
 	{
-		path = ft_strjoin_free(path, env[i]);
-		path = ft_strjoin_free(path, cmd_options);
+		path = ft_strjoin(path, env[i]); //"/bin"
+		path = ft_strjoin_free(path, cmd_options); //"bin/cat -e"
 		if (access(path, X_OK) != ERROR)
 		{
 			info->path = path;
@@ -74,6 +74,7 @@ int	path_access(char **env, char *cmd_options, t_info *info)
 		path = NULL;
 		i++;
 	}
+	free(cmd_options);
 	// free(info->env);
 	perror("Not access");
 	return (false);

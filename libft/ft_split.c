@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seok <seok@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: seok <seok@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 20:50:17 by seok              #+#    #+#             */
-/*   Updated: 2022/12/30 01:18:13 by seok             ###   ########.fr       */
+/*   Updated: 2023/08/02 15:25:06 by seok             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"libft.h"
-
-void	my_free(char **arr)
-{
-	int	idx;
-
-	idx = 0;
-	while (arr[idx])
-	{
-		free(arr[idx]);
-		idx++;
-	}
-	free(arr);
-	arr = NULL;
-}
 
 int	my_word_check(char const *s, char c)
 {

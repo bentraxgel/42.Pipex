@@ -6,7 +6,7 @@ INCD = libft.h $(GNL_DIR)get_next_line.h
 MOD_DIR = module_my/
 MOD_SRC = $(addprefix $(MOD_DIR), \
 			my_atoi_pro.c my_error.c my_alloc_guard.c\
-			my_atoi_hex.c)
+			my_atoi_hex.c my_free.c)
 GNL_DIR = gnl/
 GNL_SRC = $(addprefix $(GNL_DIR), \
 			get_next_line.c get_next_line_utill.c)
